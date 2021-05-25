@@ -23,3 +23,45 @@ The argument to the `--output` option should be one of 1, 2, or 3, specifying on
 - Output 3 – sorted by last name (descending)
 
 If unspecified, this program will default to output style 1.
+
+## Starting the REST service
+
+`$ clj -X exercise.rest/run`
+
+The service runs on port 3000 by default (this can be overridden with
+`--port`).
+
+## Interacting with the REST service
+
+Retrieving records from an empty database:
+```
+$ curl -X GET localhost:3000/records/birthdate
+[]
+```
+
+Adding a record to the database:
+```
+$ curl -s -X POST -H "Context-Type: text/plain" localhost:3000/records \
+       --data 'Aardvark, Zebulon, zebulon@example.com, red, 1/1/2001' | jq
+{
+  "last-name": "Aardvark",
+  "first-name": "Zebulon",
+  "email": "zebulon@example.com",
+  "favorite-color": "red",
+  "date-of-birth": "1/1/2001"
+}
+```
+
+Retrieving records from a non-empty database:
+```
+$ curl -s -X GET localhost:3000/records/birthdate | jq
+[
+  {
+    "last-name": "Aardvark",
+    "first-name": "Zebulon",
+    "email": "zebulon@example.com",
+    "favorite-color": "red",
+    "date-of-birth": "1/1/2001"
+  }
+]
+```

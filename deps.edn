@@ -1,6 +1,9 @@
 {:deps
  {clojure.java-time/clojure.java-time {:mvn/version "0.3.2"}
-  nubank/matcher-combinators {:mvn/version "3.1.4"}}
+  nubank/matcher-combinators {:mvn/version "3.1.4"}
+  ring/ring {:mvn/version "1.9.3"}
+  ring/ring-json {:mvn/version "0.5.1"}
+  ring/ring-mock {:mvn/version "0.4.0"}}
 
  :aliases
  {:test {:extra-paths ["test"]
